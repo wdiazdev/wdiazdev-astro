@@ -11,7 +11,8 @@ const navItems = [
 ---
 
 <nav
-  class="fixed top-0 left-0 right-0 z-[100] bg-black/30 backdrop-blur-md shadow-[0_1px_4px_-1px_rgba(255,255,255,0.4)]"
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-[100] backdrop-blur-md shadow-[0_1px_4px_-1px_rgba(255,255,255,0.4)]"
 >
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex justify-between items-center h-16">
@@ -35,6 +36,8 @@ const navItems = [
       </div>
 
       <a
+        id="linkedin-link"
+        aria-label="Visit WDIAZDEV LinkedIn profile"
         href="https://www.linkedin.com/in/wdiazdev"
         target="_blank"
         rel="noopener noreferrer"
@@ -43,7 +46,7 @@ const navItems = [
         <Icon
           name="mdi:linkedin"
           size={30}
-          class="text-gray-400 hover:text-purple-600 transition-colors duration-300"
+          class="text-gray-400 hover:text-blue-500 transition-colors duration-300"
         />
       </a>
 
@@ -65,3 +68,17 @@ const navItems = [
     </div>
   </div>
 </nav>
+
+<script>
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
+      const navbar = document.getElementById("navbar")
+      if (!navbar) return
+      if (window.scrollY > 100) {
+        navbar.classList.add("bg-black/30")
+      } else {
+        navbar.classList.remove("bg-black/30")
+      }
+    })
+  }
+</script>
