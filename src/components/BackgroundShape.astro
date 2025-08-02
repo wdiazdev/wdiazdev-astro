@@ -1,0 +1,23 @@
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+  <div
+    class="absolute top-[20vh] w-[70vw] h-[50vh] bg-gradient-to-r from-blue-500 to-purple-600
+    rounded-tr-full rounded-br-full blur-3xl opacity-20 animate-pulse custom-pulse"
+  >
+  </div>
+</div>
+
+<style>
+  @keyframes customPulse {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .custom-pulse {
+    animation: customPulse 6s ease-in-out infinite;
+  }
+</style>
