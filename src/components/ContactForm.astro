@@ -1,0 +1,145 @@
+<form
+  id="contactForm"
+  class="w-full max-w-2xl mx-auto mt-20 rounded-2xl border border-white/10 bg-zinc-900/80
+  backdrop-blur-md shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] p-6 sm:p-8 space-y-6 lg:mx-0 lg:translate-x-22"
+>
+  <!-- Header -->
+  <div class="space-y-1">
+    <h3 class="text-xl text-white/90">Send a message</h3>
+    <p class="text-sm text-white/60">
+      I’ll get back to you as soon as possible.
+    </p>
+  </div>
+  <!-- Name -->
+  <label class="block">
+    <span class="mb-2 block text-sm font-medium text-white/80">Name</span>
+    <input
+      name="from_name"
+      type="text"
+      required
+      autocomplete="name"
+      class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white
+      placeholder-white/30 outline-none transition focus:border-lime-300/60 focus:ring-1 focus:ring-lime-300/40"
+      placeholder="Your name"
+    />
+  </label>
+
+  <!-- Email -->
+  <label class="block">
+    <span class="mb-2 block text-sm font-medium text-white/80">Email</span>
+    <input
+      name="user_email"
+      type="email"
+      required
+      autocomplete="email"
+      inputmode="email"
+      class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white
+      placeholder-white/30
+             outline-none transition
+             focus:border-lime-300/60 focus:ring-1 focus:ring-lime-300/40"
+      placeholder="you@email.com"
+    />
+  </label>
+
+  <!-- Subject -->
+  <label class="block">
+    <span class="mb-2 block text-sm font-medium text-white/80">Subject</span>
+    <input
+      name="subject"
+      type="text"
+      required
+      class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white
+      placeholder-white/30
+             outline-none transition
+             focus:border-lime-300/60 focus:ring-1 focus:ring-lime-300/40"
+      placeholder="What’s this about?"
+    />
+  </label>
+
+  <!-- Message -->
+  <label class="block">
+    <span class="mb-2 block text-sm font-medium text-white/80">Message</span>
+    <textarea
+      name="message"
+      required
+      rows="6"
+      class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white
+      placeholder-white/30
+             outline-none transition resize-y
+             focus:border-lime-300/60 focus:ring-1 focus:ring-lime-300/40"
+      placeholder="Tell me about your project..."></textarea>
+  </label>
+
+  <!-- Submit -->
+  <div class="flex items-center justify-between gap-4">
+    <p class="text-xs text-white/50">
+      By sending, you agree to be contacted about this inquiry.
+    </p>
+
+    <button
+      id="contact--btn"
+      type="submit"
+      class="inline-flex items-center gap-2 rounded-xl bg-lime-300 text-[#090b11] px-5 py-3
+      font-semibold
+             shadow-[0_8px_20px_-8px_rgba(190,242,100,0.6)]
+             transition active:scale-[0.98] hover:brightness-95 focus-visible:outline-none
+             focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-lime-300
+             focus-visible:ring-offset-[#090b11]"
+      data-loading="false"
+    >
+      <span class="cursor-pointer [data-loading=true]:hidden">SEND</span>
+      <span class="hidden [data-loading=true]:inline-flex items-center gap-2">
+        <span
+          class="inline-block h-4 w-4 rounded-full border-2 border-[#090b11]/40
+          border-t-[#090b11] animate-spin"
+        ></span>
+        Sending…
+      </span>
+    </button>
+  </div>
+
+  <script type="module">
+    import emailjs from "@emailjs/browser"
+    const initContactForm = () => {
+      const form = document.querySelector("#contactForm")
+      const btn = document.querySelector("#contact--btn")
+      if (!form || !btn) return
+
+      const setLoading = (on) => {
+        btn.toggleAttribute("disabled", on)
+        btn.setAttribute("data-loading", on ? "true" : "false")
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault()
+        setLoading(true)
+        try {
+          const res = await emailjs.sendForm(
+            import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+            import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+            form,
+            import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
+          )
+          if (res?.text === "OK") {
+            alert("Message sent successfully!")
+            form.reset()
+          } else {
+            alert("Unable to send message, please try again!")
+          }
+        } catch (err) {
+          console.error(err)
+          alert("Unable to send message, please try again!")
+        } finally {
+          setLoading(false)
+        }
+      })
+    }
+
+    // ensure DOM is ready (usually not necessary at bottom, but safe)
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initContactForm)
+    } else {
+      initContactForm()
+    }
+  </script>
+</form>

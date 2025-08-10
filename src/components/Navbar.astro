@@ -6,7 +6,7 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#" },
   { label: "Skills", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Contact", href: "#contact" },
 ]
 ---
 
@@ -27,7 +27,7 @@ const navItems = [
           navItems.map((item) => (
             <a
               href={item.href}
-              class="text-gray-400 hover:text-lime-200 transition-colors duration-300"
+              class="text-gray-400 font-medium hover:text-lime-200 transition-colors duration-300"
             >
               {item.label}
             </a>
@@ -81,8 +81,10 @@ const navItems = [
 
   <aside
     id="mobilePanel"
-    class="absolute right-0 top-0 h-full w-[80%] max-w-sm bg-zinc-900/95 border-l border-white/10
-           translate-x-full transition-transform duration-300 will-change-transform"
+    class="absolute right-0 top-0 h-full w-[80%] max-w-sm
+         bg-gradient-to-b from-zinc-900/90 via-20% to-lime-300/40
+         border-l border-white/10
+         translate-x-full transition-transform duration-300 will-change-transform"
     role="dialog"
     aria-modal="true"
     aria-labelledby="mobileMenuTitle"
@@ -108,7 +110,7 @@ const navItems = [
         navItems.map((item) => (
           <a
             href={item.href}
-            class="block text-base text-gray-200 hover:text-lime-200 transition-colors duration-300 focus:outline-none"
+            class="block text-base font-medium text-gray-200 hover:text-lime-200 transition-colors duration-300 focus:outline-none"
           >
             {item.label}
           </a>
@@ -119,7 +121,7 @@ const navItems = [
         href="https://www.linkedin.com/in/wdiazdev"
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-6 inline-flex items-center gap-2 text-gray-200 hover:text-lime-200"
+        class="mt-6 inline-flex items-center gap-2 text-gray-200 font-medium hover:text-lime-200"
         aria-label="Visit WDIAZDEV LinkedIn profile"
       >
         <Icon name="mdi:linkedin" class="-translate-y-0.5" size={22} />

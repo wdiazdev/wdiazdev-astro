@@ -1,5 +1,20 @@
 <div id="about" class="relative min-h-screen items-center z-50 p-8">
-  <div class="flex flex-col justify-start">
+  <!-- Background image + gradient overlay -->
+  <div
+    class="absolute inset-0"
+    style="
+      background-image:
+        linear-gradient(to bottom, #090b11 0%, rgba(9,11,17,0.4) 50%, #090b11 100%),
+        url('/images/about-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.40;
+    "
+  >
+  </div>
+
+  <!-- Foreground content -->
+  <div class="relative flex flex-col justify-start">
     <h3 class="text-[60px]">About</h3>
     <h1 class="text-[146px] font-bold">About</h1>
     <p class="text-[26px] max-w-4xl">About</p>
