@@ -2,8 +2,8 @@
 import { Icon } from "astro-icon/components"
 
 const navItems = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#" },
+  { label: "Home", href: "#welcome" },
+  { label: "About", href: "#about" },
   { label: "Projects", href: "#" },
   { label: "Skills", href: "#" },
   { label: "Contact", href: "#" },
@@ -51,34 +51,157 @@ const navItems = [
       </a>
 
       <div class="md:hidden">
-        <button class="hover:text-blue-600 focus:outline-none cursor-pointer">
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
+        <button
+          id="menu-btn"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+          class="focus:outline-none cursor-pointer"
+        >
+          <Icon
+            name="mdi:menu"
+            size={30}
+            class="text-gray-400 hover:text-lime-200 transition-colors duration-300"
+          />
         </button>
       </div>
     </div>
   </div>
 </nav>
 
-<script>
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
-      const navbar = document.getElementById("navbar")
-      if (!navbar) return
-      if (window.scrollY > 100) {
-        navbar.classList.add("bg-black/30")
-      } else {
-        navbar.classList.remove("bg-black/30")
+<div
+  id="mobileMenu"
+  class="fixed inset-0 z-[120] opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
+  aria-hidden="true"
+>
+  <div
+    id="mobileBackdrop"
+    class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+  >
+  </div>
+
+  <aside
+    id="mobilePanel"
+    class="absolute right-0 top-0 h-full w-[80%] max-w-sm bg-zinc-900/95 border-l border-white/10
+           translate-x-full transition-transform duration-300 will-change-transform"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="mobileMenuTitle"
+    tabindex="-1"
+  >
+    <div
+      class="flex items-center justify-between px-4 h-16 border-b border-white/10"
+    >
+      <h2 id="mobileMenuTitle" class="text-lg font-semibold text-white/90">
+        Menu
+      </h2>
+      <button id="closeMenu" class="p-2 cursor-pointer" aria-label="Close menu">
+        <Icon
+          name="mdi:close"
+          size={28}
+          class="text-gray-300 hover:text-lime-200 transition-colors duration-300"
+        />
+      </button>
+    </div>
+
+    <nav class="px-4 py-8 space-y-4">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="block text-base text-gray-200 hover:text-lime-200 transition-colors duration-300 focus:outline-none"
+          >
+            {item.label}
+          </a>
+        ))
       }
+
+      <a
+        href="https://www.linkedin.com/in/wdiazdev"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-6 inline-flex items-center gap-2 text-gray-200 hover:text-lime-200"
+        aria-label="Visit WDIAZDEV LinkedIn profile"
+      >
+        <Icon name="mdi:linkedin" class="-translate-y-0.5" size={22} />
+        LinkedIn
+      </a>
+    </nav>
+  </aside>
+</div>
+
+<script is:inline>
+  const navbarScrollHandler = () => {
+    const navbar = document.getElementById("navbar")
+    if (!navbar) return
+
+    const onScroll = () => {
+      if (window.scrollY > 100) navbar.classList.add("bg-black/30")
+      else navbar.classList.remove("bg-black/30")
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    onScroll()
+  }
+
+  const mobileMenuHandler = () => {
+    const btn = document.getElementById("menu-btn")
+    const menu = document.getElementById("mobileMenu")
+    const panel = document.getElementById("mobilePanel")
+    const backdrop = document.getElementById("mobileBackdrop")
+    const closeBtn = document.getElementById("closeMenu")
+
+    if (!btn || !menu || !panel || !backdrop || !closeBtn) return
+
+    let lastFocused = null
+
+    const openMenu = () => {
+      lastFocused = document.activeElement
+      menu.classList.remove("opacity-0", "pointer-events-none")
+      panel.classList.remove("translate-x-full")
+      btn.setAttribute("aria-expanded", "true")
+      menu.setAttribute("aria-hidden", "false")
+      document.documentElement.classList.add("overflow-hidden")
+
+      const focusTarget =
+        panel.querySelector("a, button, [tabindex]:not([tabindex='-1'])") ||
+        panel
+      focusTarget.focus()
+
+      window.addEventListener("keydown", onKeydown)
+    }
+
+    const closeMenu = () => {
+      menu.classList.add("opacity-0", "pointer-events-none")
+      panel.classList.add("translate-x-full")
+      btn.setAttribute("aria-expanded", "false")
+      menu.setAttribute("aria-hidden", "true")
+      document.documentElement.classList.remove("overflow-hidden")
+
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus()
+      }
+
+      window.removeEventListener("keydown", onKeydown)
+    }
+
+    const onKeydown = (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault()
+        closeMenu()
+      }
+    }
+
+    btn.addEventListener("click", openMenu)
+    closeBtn.addEventListener("click", closeMenu)
+    backdrop.addEventListener("click", closeMenu)
+
+    panel.addEventListener("click", (e) => {
+      const link = e.target?.closest?.("a")
+      if (link) closeMenu()
     })
   }
+
+  // Init
+  navbarScrollHandler()
+  mobileMenuHandler()
 </script>
