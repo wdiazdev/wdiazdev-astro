@@ -92,11 +92,14 @@
   </div>
 </form>
 
-<script type="module" is:inline>
-  const form = document.getElementById("contactForm")
+<script>
+  import { getEmailTemplate } from "../utils/emailTemplate"
+
+  const form = document.getElementById("contactForm") as HTMLFormElement
   const btn = document.getElementById("contactBtn")
+
   if (form && btn) {
-    const setLoading = (on) => {
+    const setLoading = (on: boolean) => {
       btn.toggleAttribute("disabled", on)
       btn.setAttribute("data-loading", on ? "true" : "false")
     }
@@ -105,12 +108,21 @@
       e.preventDefault()
       setLoading(true)
       try {
-        const fd = new FormData(form)
+        const formData = new FormData(form)
+
+        const message = String(formData.get("message") ?? "")
+        const senderEmail = String(formData.get("user_email") ?? "")
+        const subject = String(formData.get("subject") ?? "")
+
+        const htmlTemplate = getEmailTemplate(senderEmail, subject, message)
+
         const payload = {
-          name: String(fd.get("from_name") ?? ""),
-          email: String(fd.get("user_email") ?? ""),
-          subject: String(fd.get("subject") ?? ""),
-          message: String(fd.get("message") ?? ""),
+          to: "wdiazdev@gmail.com",
+          from: "portfolio@wdiazdev.com",
+          subject: String(formData.get("subject") ?? ""),
+          html: htmlTemplate,
+          text: String(formData.get("message") ?? ""),
+          replyTo: String(formData.get("user_email") ?? ""),
         }
 
         const res = await fetch("/api/sendEmail.json", {
@@ -124,8 +136,8 @@
 
         alert("Message sent! I’ll get back to you soon.")
         form.reset()
-      } catch (err) {
-        console.error(err)
+      } catch (error) {
+        console.error("Error: ", error)
         alert("Unable to send message. Please try again.")
       } finally {
         setLoading(false)
