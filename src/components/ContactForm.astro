@@ -1,5 +1,23 @@
+---
+import { actions } from "astro:actions"
+const result = Astro.getActionResult(actions.send)
+---
+
+{
+  result?.error && (
+    <p class="mt-4 text-sm text-red-400">Failed: {result.error.message}</p>
+  )
+}
+{
+  result?.data && (
+    <p class="mt-4 text-sm text-lime-300">Sent! ID: {result.data.id}</p>
+  )
+}
+
 <form
   id="contactForm"
+  method="POST"
+  action={actions.send}
   class="w-full max-w-2xl mx-auto mt-20 rounded-2xl border border-white/10 bg-zinc-900/80
   backdrop-blur-md shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] p-6 sm:p-8 space-y-6 lg:mx-0 lg:translate-x-22"
 >
@@ -77,7 +95,7 @@
     </p>
 
     <button
-      id="contact--btn"
+      id="contactBtn"
       type="submit"
       class="inline-flex items-center gap-2 rounded-xl bg-lime-300 text-[#090b11] px-5 py-3
       font-semibold
@@ -88,58 +106,16 @@
       data-loading="false"
     >
       <span class="cursor-pointer [data-loading=true]:hidden">SEND</span>
-      <span class="hidden [data-loading=true]:inline-flex items-center gap-2">
-        <span
-          class="inline-block h-4 w-4 rounded-full border-2 border-[#090b11]/40
-          border-t-[#090b11] animate-spin"
-        ></span>
-        Sending…
-      </span>
     </button>
   </div>
 
   <script type="module">
-    import emailjs from "@emailjs/browser"
-    const initContactForm = () => {
-      const form = document.querySelector("#contactForm")
-      const btn = document.querySelector("#contact--btn")
-      if (!form || !btn) return
-
-      const setLoading = (on) => {
-        btn.toggleAttribute("disabled", on)
-        btn.setAttribute("data-loading", on ? "true" : "false")
-      }
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        try {
-          const res = await emailjs.sendForm(
-            import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-            import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
-            form,
-            import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
-          )
-          if (res?.text === "OK") {
-            alert("Message sent successfully!")
-            form.reset()
-          } else {
-            alert("Unable to send message, please try again!")
-          }
-        } catch (err) {
-          console.error(err)
-          alert("Unable to send message, please try again!")
-        } finally {
-          setLoading(false)
-        }
-      })
-    }
-
-    // ensure DOM is ready (usually not necessary at bottom, but safe)
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initContactForm)
-    } else {
-      initContactForm()
-    }
+    import { actions } from "astro:actions"
+    const form = document.getElementById("contactForm")
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault()
+      const { data, error } = await actions.send(new FormData(form))
+      // handle data/error...
+    })
   </script>
 </form>
