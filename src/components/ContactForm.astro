@@ -1,23 +1,5 @@
----
-import { actions } from "astro:actions"
-const result = Astro.getActionResult(actions.send)
----
-
-{
-  result?.error && (
-    <p class="mt-4 text-sm text-red-400">Failed: {result.error.message}</p>
-  )
-}
-{
-  result?.data && (
-    <p class="mt-4 text-sm text-lime-300">Sent! ID: {result.data.id}</p>
-  )
-}
-
 <form
   id="contactForm"
-  method="POST"
-  action={actions.send}
   class="w-full max-w-2xl mx-auto mt-20 rounded-2xl border border-white/10 bg-zinc-900/80
   backdrop-blur-md shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] p-6 sm:p-8 space-y-6 lg:mx-0 lg:translate-x-22"
 >
@@ -108,14 +90,48 @@ const result = Astro.getActionResult(actions.send)
       <span class="cursor-pointer [data-loading=true]:hidden">SEND</span>
     </button>
   </div>
+</form>
 
-  <script type="module">
-    import { actions } from "astro:actions"
-    const form = document.getElementById("contactForm")
+<script type="module" is:inline>
+  const form = document.getElementById("contactForm")
+  const btn = document.getElementById("contactBtn")
+  if (form && btn) {
+    const setLoading = (on) => {
+      btn.toggleAttribute("disabled", on)
+      btn.setAttribute("data-loading", on ? "true" : "false")
+    }
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
-      const { data, error } = await actions.send(new FormData(form))
-      // handle data/error...
+      setLoading(true)
+      try {
+        const fd = new FormData(form)
+        const payload = {
+          name: String(fd.get("from_name") ?? ""),
+          email: String(fd.get("user_email") ?? ""),
+          subject: String(fd.get("subject") ?? ""),
+          message: String(fd.get("message") ?? ""),
+        }
+
+        const res = await fetch("/api/sendEmail.json", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+
+        const out = await res.json()
+        if (!res.ok) throw new Error(out?.error || "Failed to send")
+
+        alert("Message sent! I’ll get back to you soon.")
+        form.reset()
+      } catch (err) {
+        console.error(err)
+        alert("Unable to send message. Please try again.")
+      } finally {
+        setLoading(false)
+      }
     })
-  </script>
-</form>
+  } else {
+    console.warn("contactForm or contactBtn not found")
+  }
+</script>

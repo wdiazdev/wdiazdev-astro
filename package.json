@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "postinstall": "astro telemetry disable"
   },
   "dependencies": {
     "@astrojs/node": "^9.4.0",
@@ -15,7 +16,8 @@
     "astro": "^5.12.5",
     "astro-icon": "^1.1.5",
     "resend": "^6.0.1",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
