@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components"
+
+const className = "text-2xl md:text-4xl"
+
+const icons = [
+  { title: "Astro", name: "skill-icons:astro", class: className },
+  { title: "Typescript", name: "skill-icons:typescript", class: className },
+  { title: "HTML", name: "skill-icons:html", class: className },
+  {
+    title: "Tailwind",
+    name: "skill-icons:tailwindcss-dark",
+    class: "text-4xl",
+  },
+]
+---
+
+<div
+  id="footer"
+  class="flex flex-col items-center justify-center gap-4 h-[16svh] w-full overflow-hidden"
+>
+  <div id="footer-icons" class="flex items-center gap-4 max-w-2xl">
+    {
+      icons.map(({ title, name, class: className }) => (
+        <Icon title={title} name={name} class={className} />
+      ))
+    }
+  </div>
+  <p class="text-base md:text-xl">
+    Designed & Built by
+    <span class="font-semibold text-lime-300">Wilfredo Diaz</span>
+  </p>
+</div>
