@@ -1,3 +1,19 @@
+<style>
+  .spinner {
+    width: 22px;
+    height: 22px;
+    border: 3px solid rgba(255, 255, 255, 0.25);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spinner-rotate 0.6s linear infinite;
+  }
+  @keyframes spinner-rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
 <form
   id="contactForm"
   class="w-full max-w-2xl mx-auto mt-20 rounded-2xl border border-white/10 bg-zinc-900/80
@@ -79,71 +95,20 @@
     <button
       id="contactBtn"
       type="submit"
-      class="inline-flex items-center gap-2 rounded-xl bg-lime-300 text-[#090b11] px-5 py-3
-      font-semibold
-             shadow-[0_8px_20px_-8px_rgba(190,242,100,0.6)]
-             transition active:scale-[0.98] hover:brightness-95 focus-visible:outline-none
-             focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-lime-300
-             focus-visible:ring-offset-[#090b11]"
+      class="group inline-flex items-center justify-center gap-2 w-28 rounded-md bg-lime-300/80
+      text-black px-5 py-3 font-semibold hover:bg-lime-300 transition-colors duration-300 active:scale-95
+      disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
       data-loading="false"
     >
-      <span class="cursor-pointer [data-loading=true]:hidden">SEND</span>
+      <span class="group-data-[loading=true]:hidden">SEND</span>
+      <span class="hidden group-data-[loading=true]:inline-flex items-center">
+        <div class="spinner" aria-hidden="true"></div>
+      </span>
     </button>
   </div>
 </form>
 
 <script>
-  import { getEmailTemplate } from "../utils/emailTemplate"
-
-  const form = document.getElementById("contactForm") as HTMLFormElement
-  const btn = document.getElementById("contactBtn")
-
-  if (form && btn) {
-    const setLoading = (on: boolean) => {
-      btn.toggleAttribute("disabled", on)
-      btn.setAttribute("data-loading", on ? "true" : "false")
-    }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault()
-      setLoading(true)
-      try {
-        const formData = new FormData(form)
-
-        const message = String(formData.get("message") ?? "")
-        const senderEmail = String(formData.get("user_email") ?? "")
-        const subject = String(formData.get("subject") ?? "")
-
-        const htmlTemplate = getEmailTemplate(senderEmail, subject, message)
-
-        const payload = {
-          to: "wdiazdev@gmail.com",
-          from: "portfolio@wdiazdev.com",
-          subject: String(formData.get("subject") ?? ""),
-          html: htmlTemplate,
-          text: String(formData.get("message") ?? ""),
-          replyTo: String(formData.get("user_email") ?? ""),
-        }
-
-        const res = await fetch("/api/sendEmail.json", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        })
-
-        const out = await res.json()
-        if (!res.ok) throw new Error(out?.error || "Failed to send")
-
-        alert("Message sent! I’ll get back to you soon.")
-        form.reset()
-      } catch (error) {
-        console.error("Error: ", error)
-        alert("Unable to send message. Please try again.")
-      } finally {
-        setLoading(false)
-      }
-    })
-  } else {
-    console.warn("contactForm or contactBtn not found")
-  }
+  import { initFormScript } from "../scripts/initFormScript"
+  initFormScript()
 </script>

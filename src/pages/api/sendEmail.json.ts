@@ -29,27 +29,27 @@ export const POST: APIRoute = async ({ request }) => {
     })
 
     if (error) {
-      return new Response(JSON.stringify({ error: error.message }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      })
+      return new Response(
+        JSON.stringify({
+          error: "Resend API Error",
+          message: error.message,
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      )
     }
 
     return new Response(JSON.stringify({ success: true, id: data?.id }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     })
-  } catch (err: any) {
-    try {
-      const raw = await request.clone().text()
-      console.error("Failed to parse JSON. Raw body:", raw)
-    } catch {}
-    return new Response(
-      JSON.stringify({ error: "Invalid JSON body", detail: err?.message }),
-      {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      },
-    )
+  } catch (error) {
+    console.error("Error handling request:", error)
+    return new Response(JSON.stringify({ error: "Invalid request" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    })
   }
 }
