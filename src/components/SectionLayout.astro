@@ -12,13 +12,15 @@ const { id, class: className, header, title, subtitle } = Astro.props as Props
 
 <section
   id={id}
-  class={`relative h-[100svh] w-full overflow-hidden px-4 md:px-8 ${className ?? ""}`}
+  class={`relative min-h-[100svh] w-full overflow-hidden px-4 md:px-8 ${className ?? ""}`}
 >
   {
     header && (
       <div class="relative z-50 mt-18">
         <h1 class="text-[36px] md:text-[76px] font-bold">{title}</h1>
-        <p class="text-[18px] md:text-[26px]">{subtitle}</p>
+        <p class="text-[18px] md:text-[26px] font-semibold text-lime-300/80">
+          {subtitle}
+        </p>
       </div>
     )
   }

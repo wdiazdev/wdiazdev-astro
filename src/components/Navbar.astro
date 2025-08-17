@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components"
 const navItems = [
   { label: "Home", href: "#welcome" },
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
+  { label: "Portfolio", href: "#portfolio" },
   { label: "Skills", href: "#" },
   { label: "Contact", href: "#contact" },
 ]
@@ -18,7 +18,7 @@ const navItems = [
     <div class="flex justify-between items-center h-16">
       <a
         href="/"
-        class="text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
+        class="text-xl font-bold bg-gradient-to-r from-blue-500 to-lime-300 bg-clip-text text-transparent"
         >WDIAZDEV</a
       >
 
@@ -27,7 +27,7 @@ const navItems = [
           navItems.map((item) => (
             <a
               href={item.href}
-              class="text-gray-400 font-medium hover:text-lime-200 transition-colors duration-300"
+              class="text-gray-400 font-medium hover:text-lime-300 transition-colors duration-300"
             >
               {item.label}
             </a>
@@ -46,7 +46,7 @@ const navItems = [
         <Icon
           name="mdi:linkedin"
           size={30}
-          class="text-gray-400 hover:text-lime-200 transition-colors duration-300"
+          class="text-gray-400 hover:text-lime-300 transition-colors duration-300"
         />
       </a>
 
@@ -60,7 +60,7 @@ const navItems = [
           <Icon
             name="mdi:menu"
             size={30}
-            class="text-gray-400 hover:text-lime-200 transition-colors duration-300"
+            class="text-gray-400 hover:text-lime-300 transition-colors duration-300"
           />
         </button>
       </div>
@@ -93,14 +93,14 @@ const navItems = [
     <div
       class="flex items-center justify-between px-4 h-16 border-b border-white/10"
     >
-      <h2 id="mobileMenuTitle" class="text-lg font-semibold text-white/90">
+      <h2 id="mobileMenuTitle" class="text-lg font-semibold text-gray-400">
         Menu
       </h2>
       <button id="closeMenu" class="p-2 cursor-pointer" aria-label="Close menu">
         <Icon
           name="mdi:close"
           size={28}
-          class="text-gray-300 hover:text-lime-200 transition-colors duration-300"
+          class="text-gray-400 hover:text-lime-300 transition-colors duration-300"
         />
       </button>
     </div>
@@ -110,7 +110,7 @@ const navItems = [
         navItems.map((item) => (
           <a
             href={item.href}
-            class="block text-base font-medium text-gray-200 hover:text-lime-200 transition-colors duration-300 focus:outline-none"
+            class="block text-base font-medium text-gray-400 hover:text-lime-300 transition-colors duration-300 focus:outline-none"
           >
             {item.label}
           </a>
@@ -121,7 +121,7 @@ const navItems = [
         href="https://www.linkedin.com/in/wdiazdev"
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-6 inline-flex items-center gap-2 text-gray-200 font-medium hover:text-lime-200"
+        class="mt-6 inline-flex items-center gap-2 text-gray-400 font-medium hover:text-lime-300 transition-colors duration-300"
         aria-label="Visit WDIAZDEV LinkedIn profile"
       >
         <Icon name="mdi:linkedin" class="-translate-y-0.5" size={22} />

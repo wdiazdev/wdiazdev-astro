@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import { fade } from "astro:transitions"
+import SectionLayout from "../../components/SectionLayout.astro"
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects")
+
+  return projects.map((project) => ({
+    params: { id: project.slug },
+    props: { project },
+  }))
+}
+
+const { project } = Astro.props
+const { data, slug } = project
+const { name, description, img, repository, live } = data
+
+const { Content } = await render(project)
+---
+
+<Layout>
+  <SectionLayout>
+    <img
+      src={`/images/${img}`}
+      alt={slug}
+      class="absolute inset-0 w-full h-full object-cover z-0"
+    />
+    <div
+      class="pointer-events-none absolute inset-0 z-10 bg-[#090b11]/80 backdrop-blur-xs"
+      aria-hidden="true"
+    >
+    </div>
+    <main
+      class="relative z-50 h-full w-full flex flex-col justify-center min-h-[100svh]"
+      transition:animate={fade({ duration: "0.8s" })}
+    >
+      <h1
+        transition:name={`name-${slug}`}
+        class="text-[36px] md:text-[100px] font-bold"
+      >
+        {name}
+      </h1>
+      <div class="max-w-3xl prose prose-invert">
+        <Content />
+      </div>
+    </main>
+  </SectionLayout>
+</Layout>

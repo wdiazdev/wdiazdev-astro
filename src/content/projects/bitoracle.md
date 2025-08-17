@@ -7,7 +7,7 @@ live: https://wdiazdev.github.io/Bitoracle/
 stack:
 ---
 
-Description: Bitoracle is a cryptocurrency dashboard that allows users to track all their assets on one page and provides market data in real time. Routing: The web application counts with multiple pages built with react router to better allows the user to navigate the content of the web application while maintaining the UI in sync with the URL.
+Bitoracle is a cryptocurrency dashboard that allows users to track all their assets on one page and provides market data in real time. Routing: The web application counts with multiple pages built with react router to better allows the user to navigate the content of the web application while maintaining the UI in sync with the URL.
 
 Authentication: The authentication process is implemented with Google Firebase services and has an easy-to-follow UI and UX. The users can create new accounts, sign in, sign out, and recover passwords by email. Data Fetching: To communicate with the server through the HTTP protocol, Axios, the promise-based HTTP client for Node.js, was implemented.
 

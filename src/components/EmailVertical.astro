@@ -1,0 +1,23 @@
+---
+interface Props {
+  email: string
+  class?: string
+}
+const { email, class: className } = Astro.props as Props
+---
+
+<div
+  data-email={email}
+  class={`hidden md:fixed top-22 right-4 md:flex flex-col items-center z-60
+          text-md bg-gradient-to-b from-blue-500 to-lime-300/80
+          bg-clip-text text-transparent font-semibold cursor-pointer select-none
+          ${className ?? ""}`}
+  title="Click to copy"
+>
+  {email.split("").map((char) => <span>{char}</span>)}
+</div>
+
+<script>
+  import { emailVerticalScript } from "../scripts/emailVerticalScript"
+  emailVerticalScript()
+</script>

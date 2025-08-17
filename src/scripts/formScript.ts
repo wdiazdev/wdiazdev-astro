@@ -1,7 +1,7 @@
 import { emailTemplate } from "../utils/emailTemplate"
 import { showToast } from "../utils/showToast"
 
-export const initFormScript = () => {
+export const formScript = () => {
   const form = document.getElementById("contactForm") as HTMLFormElement
   const btn = document.getElementById("contactBtn")
 

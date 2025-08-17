@@ -1,21 +1,22 @@
 ---
+import Layout from "../layouts/Layout.astro"
 import FloatingRail from "../components/FloatingRail.astro"
 import Navbar from "../components/Navbar.astro"
 import Welcome from "../sections/Welcome.astro"
-import Layout from "../layouts/Layout.astro"
 import About from "../sections/About.astro"
 import Contact from "../sections/Contact.astro"
-import "../styles/global.css"
 import Footer from "../components/Footer.astro"
-import Projects from "../sections/Projects.astro"
+import Portfolio from "../sections/Portfolio.astro"
+import EmailVertical from "../components/EmailVertical.astro"
 ---
 
 <Layout>
   <FloatingRail />
+  <EmailVertical email="wdiazdev@gmail.com" />
   <Navbar />
   <Welcome />
   <About />
-  <Projects />
+  <Portfolio />
   <Contact />
   <Footer />
 </Layout>
