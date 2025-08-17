@@ -1,8 +1,14 @@
 ---
 import ContactForm from "../components/ContactForm.astro"
+import SectionLayout from "../components/SectionLayout.astro"
 ---
 
-<div id="contact" class="relative h-[100svh] w-full overflow-hidden">
+<SectionLayout
+  id="contact"
+  header
+  title="Get in Touch"
+  subtitle="I am available to work on your projects and bring your ideas to life."
+>
   <video
     id="contactVideo"
     class="absolute bottom-0 left-0 w-full h-full object-cover object-[0%_100%] z-0"
@@ -15,18 +21,10 @@ import ContactForm from "../components/ContactForm.astro"
   </video>
 
   <div
-    class="pointer-events-none absolute inset-0 z-[5]
-           bg-[linear-gradient(to_top,#090b11_0%,transparent_28%),linear-gradient(to_bottom,#090b11_0%,transparent_28%)]"
+    class="pointer-events-none absolute inset-0 z-10
+           bg-[linear-gradient(to_top,#090b11_0%,transparent_28%),linear-gradient(to_bottom,#090b11_0%,transparent_80%)]"
     aria-hidden="true"
   >
   </div>
-
-  <div class="relative z-10 px-8 py-8 mt-18">
-    <h1 class="text-[36px] md:text-[76px] font-bold">Get in Touch</h1>
-    <p class="text-[18px] md:text-[26px]">
-      I am available to work on your projects and bring your ideas to life.
-    </p>
-
-    <ContactForm />
-  </div>
-</div>
+  <ContactForm />
+</SectionLayout>

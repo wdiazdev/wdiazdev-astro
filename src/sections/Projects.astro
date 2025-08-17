@@ -1,0 +1,14 @@
+---
+import { getCollection } from "astro:content"
+import SectionLayout from "../components/SectionLayout.astro"
+
+const projects = await getCollection("projects")
+---
+
+<SectionLayout id="projects" header title="Projects" subtitle="My Projects">
+  <!-- <div class="relative z-10">
+  
+  </div> -->
+</SectionLayout>
+
+<script is:inline></script>
