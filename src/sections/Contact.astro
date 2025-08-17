@@ -2,12 +2,10 @@
 import ContactForm from "../components/ContactForm.astro"
 ---
 
-<div
-  id="contact"
-  class="relative h-[100svh] w-full overflow-hidden bg-[#090b11]"
->
+<div id="contact" class="relative h-[100svh] w-full overflow-hidden">
   <video
-    class="absolute bottom-0 left-0 w-full h-[90svh] object-cover object-[0%_100%] z-0"
+    id="contactVideo"
+    class="absolute bottom-0 left-0 w-full h-full object-cover object-[0%_100%] z-0"
     autoplay
     muted
     loop
@@ -17,24 +15,18 @@ import ContactForm from "../components/ContactForm.astro"
   </video>
 
   <div
-    class="absolute inset-x-0 bottom-0 h-[90svh] pointer-events-none z-10"
-    style="background: linear-gradient(to top, rgba(9,11,17,0.0) 70%, #090b11 100%);"
+    class="pointer-events-none absolute inset-0 z-[5]
+           bg-[linear-gradient(to_top,#090b11_0%,transparent_28%),linear-gradient(to_bottom,#090b11_0%,transparent_28%)]"
+    aria-hidden="true"
   >
   </div>
 
-  <div class="relative z-20 px-8 py-8 mt-18">
-    <h1 class="text-[100px] font-bold">Get in Touch</h1>
-    <p class="text-[26px]">
+  <div class="relative z-10 px-8 py-8 mt-18">
+    <h1 class="text-[36px] md:text-[76px] font-bold">Get in Touch</h1>
+    <p class="text-[18px] md:text-[26px]">
       I am available to work on your projects and bring your ideas to life.
     </p>
 
     <ContactForm />
   </div>
 </div>
-
-<script is:inline>
-  const video = document.getElementById("contactVideo")
-  if (video) {
-    video.playbackRate = 0.7
-  }
-</script>
