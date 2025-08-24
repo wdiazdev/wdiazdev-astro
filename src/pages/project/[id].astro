@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
 import { fade } from "astro:transitions"
 import SectionLayout from "../../components/SectionLayout.astro"
+import { Icon } from "astro-icon/components"
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects")
@@ -15,7 +16,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props
 const { data, slug } = project
-const { name, description, img, repository, live } = data
+const { name, img, repository, live } = data
 
 const { Content } = await render(project)
 ---
@@ -28,22 +29,69 @@ const { Content } = await render(project)
       class="absolute inset-0 w-full h-full object-cover z-0"
     />
     <div
-      class="pointer-events-none absolute inset-0 z-10 bg-[#090b11]/80 backdrop-blur-xs"
+      class="pointer-events-none absolute inset-0 z-10 bg-[#090b11]/50 backdrop-blur-xs"
       aria-hidden="true"
     >
     </div>
     <main
-      class="relative z-50 h-full w-full flex flex-col justify-center min-h-[100svh]"
+      class="relative z-50 w-full h-[100svh] flex justify-center items-center p-8"
       transition:animate={fade({ duration: "0.8s" })}
     >
-      <h1
-        transition:name={`name-${slug}`}
-        class="text-[36px] md:text-[100px] font-bold"
+      <div
+        class="flex flex-col gap-4 lg:flex-row p-6 h-[70svh] bg-zinc-900/80 backdrop-blur-3xl
+        rounded-2xl border-2 border-white/10 shadow-2xl overflow-hidden"
       >
-        {name}
-      </h1>
-      <div class="max-w-3xl prose prose-invert">
-        <Content />
+        <div class="max-w-lg">
+          <h1
+            transition:name={`name-${slug}`}
+            class="text-[36px] md:text-[100px] font-bold"
+          >
+            {name}
+          </h1>
+
+          <div class="flex gap-4 pb-4">
+            <a
+              id={`${slug}-live-link`}
+              aria-label="Visit live project"
+              href={live}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Live"
+            >
+              <Icon
+                name="mdi:world-wide-web"
+                class="text-2xl md:text-4xl text-gray-400 hover:text-lime-300 transition-colors duration-300 cursor-pointer"
+              />
+            </a>
+            <a
+              id={`${slug}-repository-link`}
+              aria-label="Visit project repository"
+              href={repository}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Repository"
+            >
+              <Icon
+                name="mdi:github"
+                class="text-2xl md:text-4xl text-gray-400 hover:text-lime-300 transition-colors duration-300 cursor-pointer"
+              />
+            </a>
+          </div>
+
+          <div
+            class="p-2 prose prose-invert text-balance rounded-2xl h-[48svh] overflow-y-auto"
+          >
+            <Content />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-8">
+          <div class="w-[60svh] h-[42svh] rounded-2xl overflow-hidden">
+            <img src={`/images/${img}`} alt={slug} class="w-full h-full" />
+          </div>
+
+          <div>Stack:</div>
+        </div>
       </div>
     </main>
   </SectionLayout>
