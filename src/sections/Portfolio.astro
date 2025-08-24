@@ -16,7 +16,7 @@ const projects = await getCollection("projects")
       {
         projects.map((project) => {
           const { slug, data } = project
-          const { name, img } = data
+          const { name, cover } = data
           return (
             <article
               id={slug}
@@ -31,7 +31,7 @@ const projects = await getCollection("projects")
                   {name}
                 </h3>
                 <img
-                  src={`/images/${img}`}
+                  src={`/images/${cover}`}
                   alt={name}
                   class="w-full h-[400px] object-center rounded-xl"
                 />

@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro"
 import { fade } from "astro:transitions"
 import SectionLayout from "../../components/SectionLayout.astro"
 import { Icon } from "astro-icon/components"
+import ImageCarousel from "../../components/ImageCarousel.astro"
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects")
@@ -16,7 +17,8 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props
 const { data, slug } = project
-const { name, img, repository, live } = data
+const { name, cover, repository, live, fullstack, frontend, backend, images } =
+  data
 
 const { Content } = await render(project)
 ---
@@ -24,7 +26,7 @@ const { Content } = await render(project)
 <Layout>
   <SectionLayout>
     <img
-      src={`/images/${img}`}
+      src={`/images/${cover}`}
       alt={slug}
       class="absolute inset-0 w-full h-full object-cover z-0"
     />
@@ -45,11 +47,12 @@ const { Content } = await render(project)
           <h1
             transition:name={`name-${slug}`}
             class="text-[36px] md:text-[100px] font-bold"
+            aria-label="Project Name"
           >
             {name}
           </h1>
 
-          <div class="flex gap-4 pb-4">
+          <div class="flex gap-4 pb-4" aria-label="Project Links">
             <a
               id={`${slug}-live-link`}
               aria-label="Visit live project"
@@ -80,17 +83,88 @@ const { Content } = await render(project)
 
           <div
             class="p-2 prose prose-invert text-balance rounded-2xl h-[48svh] overflow-y-auto"
+            aria-label="Project Description"
           >
             <Content />
           </div>
         </div>
 
-        <div class="flex flex-col gap-8">
-          <div class="w-[60svh] h-[42svh] rounded-2xl overflow-hidden">
-            <img src={`/images/${img}`} alt={slug} class="w-full h-full" />
-          </div>
+        <div class="flex flex-col gap-6">
+          <ImageCarousel images={images} slug={slug} name={name} />
 
-          <div>Stack:</div>
+          <div>
+            <h3
+              class="text-2xl font-semibold text-center underline
+                decoration-lime-300 decoration-2 underline-offset-6"
+            >
+              Tools
+            </h3>
+            {
+              !fullstack ? (
+                <div class="flex flex-col gap-2 max-w-2xl">
+                  <h3 class="text-lg font-semibold">FrontEnd:</h3>
+                  <ul
+                    class="flex flex-wrap items-center gap-4 p-1"
+                    aria-label="Frontend Technologies"
+                  >
+                    {frontend?.map((item) => {
+                      return (
+                        <li
+                          class="flex items-center gap-1"
+                          aria-label={`${item.name} Frontend Technology`}
+                        >
+                          <Icon name={item.icon} size={22} />
+                          <span>{item.name}</span>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              ) : (
+                <div class="flex flex-col gap-4">
+                  <div class="flex flex-col gap-2 max-w-2xl">
+                    <h3 class="text-lg font-semibold">FrontEnd:</h3>
+                    <ul
+                      class="flex flex-wrap items-center gap-4 p-1"
+                      aria-label="Frontend Technologies"
+                    >
+                      {frontend?.map((item) => {
+                        return (
+                          <li
+                            class="flex items-center gap-1"
+                            aria-label={`${item.name} Frontend Technology`}
+                          >
+                            <Icon name={item.icon} size={22} />
+                            <span>{item.name}</span>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+
+                  <div class="flex flex-col gap-2 max-w-2xl">
+                    <h3 class="text-lg font-semibold">BackEnd:</h3>
+                    <ul
+                      class="flex flex-wrap items-center gap-4 p-1"
+                      aria-label="Backend Technologies"
+                    >
+                      {backend?.map((item) => {
+                        return (
+                          <li
+                            class="flex items-center gap-1"
+                            aria-label={`${item.name} Backend Technology`}
+                          >
+                            <Icon name={item.icon} size={22} />
+                            <span>{item.name}</span>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              )
+            }
+          </div>
         </div>
       </div>
     </main>
