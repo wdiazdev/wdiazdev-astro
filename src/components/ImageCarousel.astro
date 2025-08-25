@@ -1,14 +1,13 @@
 ---
 export interface Props {
-  images: string[] | undefined
+  images: string[]
   slug: string
   name: string
-  interval?: number
 }
 
-const delay =
-  typeof Astro.props.interval === "number" ? Astro.props.interval : 4000
-const { images, slug, name } = Astro.props
+const { images = [], name } = Astro.props
+
+const delay = 4000
 const total = delay * (images?.length ?? 1)
 ---
 
@@ -21,7 +20,7 @@ const total = delay * (images?.length ?? 1)
     images?.map((src, i) => (
       <img
         src={`/images/${src}`}
-        class="absolute inset-0 w-full h-full object-cover select-none will-change-opacity"
+        class="absolute inset-0 w-full h-full object-fill select-none will-change-opacity"
         style={`animation: fade ${total}ms ease-in-out infinite; animation-delay: ${i * delay}ms;`}
         loading={i === 0 ? "eager" : "lazy"}
         decoding="async"

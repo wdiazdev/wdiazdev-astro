@@ -21,6 +21,11 @@ backend:
     { name: "Express", icon: "skill-icons:expressjs-light" },
     { name: "MongoDB", icon: "skill-icons:mongodb" },
   ]
+images:
+  - /airs/airs-1.jpg
+  - /airs/airs-2.jpg
+  - /airs/airs-3.jpg
+  - /airs/airs-4.jpg
 ---
 
 **AIRS** enables users to securely authenticate and effortlessly manage property listings. Whether **creating, updating, or deleting listings**, the application ensures a seamless experience for real estate portfolio management, complete with a robust **cash flow calculator**. Users can now analyze property finances for informed investment decisions.

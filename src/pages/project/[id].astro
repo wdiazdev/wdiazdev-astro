@@ -28,16 +28,15 @@ const { Content } = await render(project)
     <img
       src={`/images/${cover}`}
       alt={slug}
-      class="absolute inset-0 w-full h-full object-cover z-0"
+      class="absolute inset-0 w-full h-full object-fill z-0"
     />
     <div
-      class="pointer-events-none absolute inset-0 z-10 bg-[#090b11]/50 backdrop-blur-xs"
+      class="pointer-events-none absolute inset-0 z-10 bg-[#090b11]/60 backdrop-blur-xs"
       aria-hidden="true"
     >
     </div>
     <main
       class="relative z-50 w-full h-[100svh] flex justify-center items-center p-8"
-      transition:animate={fade({ duration: "0.8s" })}
     >
       <div
         class="flex flex-col gap-4 lg:flex-row p-6 h-[70svh] bg-zinc-900/80 backdrop-blur-3xl
@@ -45,6 +44,7 @@ const { Content } = await render(project)
       >
         <div class="max-w-lg">
           <h1
+            transition:animate={fade({ duration: 200 })}
             transition:name={`name-${slug}`}
             class="text-[36px] md:text-[100px] font-bold"
             aria-label="Project Name"
@@ -90,7 +90,11 @@ const { Content } = await render(project)
         </div>
 
         <div class="flex flex-col gap-6">
-          <ImageCarousel images={images} slug={slug} name={name} />
+          {
+            images && images.length > 0 && (
+              <ImageCarousel images={images} slug={slug} name={name} />
+            )
+          }
 
           <div>
             <h3

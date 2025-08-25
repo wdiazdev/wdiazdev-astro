@@ -18,7 +18,6 @@ images:
   - /bitoracle/bitoracle-1.jpg
   - /bitoracle/bitoracle-2.jpg
   - /bitoracle/bitoracle-3.jpg
-  - /bitoracle/bitoracle-4.jpg
 ---
 
 **Bitoracle** is a cryptocurrency dashboard that allows users to track all their assets on one page and provides market data in real time.
