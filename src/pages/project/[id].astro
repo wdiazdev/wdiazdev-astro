@@ -36,13 +36,13 @@ const { Content } = await render(project)
     >
     </div>
     <main
-      class="relative z-50 w-full h-[100svh] flex justify-center items-center p-8"
+      class="relative z-50 w-full h-[100dvh] flex justify-center items-center p-8"
     >
       <div
-        class="flex flex-col gap-4 lg:flex-row p-6 h-[70svh] bg-zinc-900/80 backdrop-blur-3xl
+        class="flex flex-col gap-4 lg:flex-row p-6 h-[70dvh] bg-zinc-900/80 backdrop-blur-3xl
         rounded-2xl border-2 border-white/10 shadow-2xl overflow-hidden"
       >
-        <div class="max-w-lg">
+        <div class="max-w-lg flex flex-col">
           <h1
             transition:animate={fade({ duration: 200 })}
             transition:name={`name-${slug}`}
@@ -82,7 +82,7 @@ const { Content } = await render(project)
           </div>
 
           <div
-            class="p-2 prose prose-invert text-balance rounded-2xl h-[48svh] overflow-y-auto"
+            class="p-2 pb-6 prose prose-invert text-balance rounded-2xl overflow-y-auto"
             aria-label="Project Description"
           >
             <Content />
