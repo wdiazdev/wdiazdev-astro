@@ -5,6 +5,7 @@ import { fade } from "astro:transitions"
 import SectionLayout from "../../components/SectionLayout.astro"
 import { Icon } from "astro-icon/components"
 import ImageCarousel from "../../components/ImageCarousel.astro"
+import ToolList from "../../components/ToolList.astro"
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects")
@@ -17,8 +18,17 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props
 const { data, slug } = project
-const { name, cover, repository, live, fullstack, frontend, backend, images } =
-  data
+const {
+  name,
+  cover,
+  repository,
+  live,
+  fullstack,
+  frontend,
+  backend,
+  images,
+  baas,
+} = data
 
 const { Content } = await render(project)
 ---
@@ -46,7 +56,7 @@ const { Content } = await render(project)
           <h1
             transition:animate={fade({ duration: 200 })}
             transition:name={`name-${slug}`}
-            class="text-[36px] md:text-[100px] font-bold"
+            class="text-[36px] md:text-[86px] font-bold"
             aria-label="Project Name"
           >
             {name}
@@ -105,66 +115,14 @@ const { Content } = await render(project)
             </h3>
             {
               !fullstack ? (
-                <div class="flex flex-col gap-2 max-w-2xl">
-                  <h3 class="text-lg font-semibold">FrontEnd:</h3>
-                  <ul
-                    class="flex flex-wrap items-center gap-4 p-1"
-                    aria-label="Frontend Technologies"
-                  >
-                    {frontend?.map((item) => {
-                      return (
-                        <li
-                          class="flex items-center gap-1"
-                          aria-label={`${item.name} Frontend Technology`}
-                        >
-                          <Icon name={item.icon} size={22} />
-                          <span>{item.name}</span>
-                        </li>
-                      )
-                    })}
-                  </ul>
+                <div class="flex flex-col gap-4">
+                  <ToolList title="FrontEnd" items={frontend} />
+                  <ToolList title="BaaS" items={baas} />
                 </div>
               ) : (
                 <div class="flex flex-col gap-4">
-                  <div class="flex flex-col gap-2 max-w-2xl">
-                    <h3 class="text-lg font-semibold">FrontEnd:</h3>
-                    <ul
-                      class="flex flex-wrap items-center gap-4 p-1"
-                      aria-label="Frontend Technologies"
-                    >
-                      {frontend?.map((item) => {
-                        return (
-                          <li
-                            class="flex items-center gap-1"
-                            aria-label={`${item.name} Frontend Technology`}
-                          >
-                            <Icon name={item.icon} size={22} />
-                            <span>{item.name}</span>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
-
-                  <div class="flex flex-col gap-2 max-w-2xl">
-                    <h3 class="text-lg font-semibold">BackEnd:</h3>
-                    <ul
-                      class="flex flex-wrap items-center gap-4 p-1"
-                      aria-label="Backend Technologies"
-                    >
-                      {backend?.map((item) => {
-                        return (
-                          <li
-                            class="flex items-center gap-1"
-                            aria-label={`${item.name} Backend Technology`}
-                          >
-                            <Icon name={item.icon} size={22} />
-                            <span>{item.name}</span>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
+                  <ToolList title="FrontEnd" items={frontend} />
+                  <ToolList title="BackEnd" items={backend} />
                 </div>
               )
             }

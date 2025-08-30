@@ -24,6 +24,14 @@ const projects = defineCollection({
         }),
       )
       .optional(),
+    baas: z
+      .array(
+        z.object({
+          name: z.string(),
+          icon: z.string(),
+        }),
+      )
+      .optional(),
     images: z.array(z.string()).optional(),
   }),
 })
