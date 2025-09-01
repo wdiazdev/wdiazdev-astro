@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
-import { fade } from "astro:transitions"
 import SectionLayout from "../../components/SectionLayout.astro"
 import { Icon } from "astro-icon/components"
 import ImageCarousel from "../../components/ImageCarousel.astro"
@@ -50,13 +49,23 @@ const { Content } = await render(project)
       class="relative z-50 w-full min-h-dvh flex justify-center items-center overflow-y-auto"
     >
       <div
-        class="flex flex-col lg:flex-row gap-4 p-4 md:p-6 lg:h-[70dvh] lg:items-stretch lg:overflow-hidden bg-zinc-900/80 backdrop-blur-3xl
-        rounded-2xl border-2 border-white/10 shadow-2xl"
+        class="flex flex-col lg:flex-row gap-4 p-4 md:p-6 lg:h-[70dvh] lg:items-stretch
+        lg:overflow-hidden bg-zinc-900/60 backdrop-blur-2xl
+        rounded-2xl border border-white/10 shadow-2xl"
       >
         <div class="flex flex-col md:min-w-md md:max-w-lg">
+          <button
+            id="back-button"
+            aria-label="Go back to portfolio"
+            type="button"
+            onclick="window.history.back()"
+          >
+            <Icon
+              name="mdi:arrow-back-circle"
+              class="text-2xl md:text-4xl text-gray-400 hover:text-lime-300 transition-colors duration-300 cursor-pointer"
+            />
+          </button>
           <h1
-            transition:animate={fade({ duration: 200 })}
-            transition:name={`name-${slug}`}
             class="text-[36px] md:text-[76px] font-bold"
             aria-label="Project Name"
           >
@@ -93,13 +102,13 @@ const { Content } = await render(project)
           </div>
 
           <div
-            class="p-2 md:mt-4 prose prose-invert text-balance rounded-2xl flex-1 min-h-0 overflow-y-auto"
+            class="p-2 md:mt-4 prose prose-invert rounded-2xl flex-1 min-h-0 overflow-y-auto"
             aria-label="Project Description"
           >
             <Content />
             {
               user ? (
-                <div class="flex flex-col p-2 md:p-4 bg-lime-400/10 rounded-2xl border border-white/10">
+                <div class="flex flex-col p-2 md:p-4 bg-lime-400/10 rounded-2xl">
                   <span class="font-semibold">
                     Demo user: <span class="font-normal">{user.username}</span>
                   </span>
@@ -120,9 +129,7 @@ const { Content } = await render(project)
             ) : null
           }
 
-          <div
-            class="flex flex-col p-4 md:p-8 bg-lime-400/10 rounded-2xl border border-white/10"
-          >
+          <div class="flex flex-col p-4 md:p-8 bg-lime-400/10 rounded-2xl">
             <h3
               class="text-xl md:text-2xl font-semibold text-center underline
                 decoration-lime-300 decoration-2 underline-offset-6"

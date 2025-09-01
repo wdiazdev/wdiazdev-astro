@@ -1,18 +1,18 @@
 ---
 interface Props {
   id?: string
-  class?: string
   header?: boolean
   title?: string
   subtitle?: string
+  fullHeight?: boolean
 }
 
-const { id, class: className, header, title, subtitle } = Astro.props as Props
+const { id, header, title, subtitle, fullHeight = true } = Astro.props as Props
 ---
 
 <section
   id={id}
-  class={`relative min-h-[100svh] w-full overflow-hidden p-4 md:p-8 ${className ?? ""}`}
+  class={`relative w-full overflow-hidden p-4 md:p-8 ${fullHeight ? "min-h-[100svh]" : "h-auto"}`}
 >
   {
     header && (
