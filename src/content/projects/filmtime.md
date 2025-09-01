@@ -21,6 +21,10 @@ images:
   - /filmtime/3.jpg
   - /filmtime/4.jpg
   - /filmtime/5.jpg
+user: { 
+username: "test@test.com",
+password: "pass123" 
+}
 ---
 
 **Film Time** is designed to let users explore **movies** and **TV shows**, see trending/upcoming/popular titles, and save their personal favorites to a protected account. It blends interactive UI elements with user authentication and data persistence, creating a personalized experience.
@@ -34,9 +38,3 @@ images:
 **Home page:** The movie and TV show pages are dynamically rendered and provide a different user interface on every page reload. This component displays the item name, tagline, release date, and two buttons—one for more information and another to play the associated videos.
 
 In addition, users can navigate through the card sliders to see what is trending, upcoming, popular, or top-rated. These cards include a hover effect that enhances interactivity (e.g., more info or play).
-
-```txt
-Demo User: test@test.com
-Demo Password: pass123
-Base API: https://api.themoviedb.org/
-```

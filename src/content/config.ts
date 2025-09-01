@@ -33,6 +33,12 @@ const projects = defineCollection({
       )
       .optional(),
     images: z.array(z.string()).optional(),
+    user: z
+      .object({
+        username: z.string(),
+        password: z.string(),
+      })
+      .optional(),
   }),
 })
 

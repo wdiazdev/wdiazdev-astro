@@ -17,7 +17,7 @@ const { title, items } = Astro.props
 {
   items && items.length > 0 ? (
     <div class="flex flex-col gap-2 max-w-2xl">
-      <h3 class="text-lg font-semibold">{title}:</h3>
+      <h3 class="text-md md:text-lg font-semibold">{title}:</h3>
       <ul
         class="flex flex-wrap items-center gap-4 p-1"
         aria-label={`${title} Technologies`}
@@ -27,8 +27,8 @@ const { title, items } = Astro.props
             class="flex items-center gap-1"
             aria-label={`${item.name} ${title} Technology`}
           >
-            <Icon name={item.icon} size={22} />
-            <span>{item.name}</span>
+            <Icon name={item.icon} class="text-sm md:text-[20px]" />
+            <span class="text-sm md:text-base">{item.name}</span>
           </li>
         ))}
       </ul>

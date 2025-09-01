@@ -28,6 +28,7 @@ const {
   backend,
   images,
   baas,
+  user,
 } = data
 
 const { Content } = await render(project)
@@ -46,23 +47,23 @@ const { Content } = await render(project)
     >
     </div>
     <main
-      class="relative z-50 w-full h-[100dvh] flex justify-center items-center p-8"
+      class="relative z-50 w-full min-h-dvh flex justify-center items-center overflow-y-auto"
     >
       <div
-        class="flex flex-col gap-4 lg:flex-row p-6 h-[70dvh] bg-zinc-900/80 backdrop-blur-3xl
-        rounded-2xl border-2 border-white/10 shadow-2xl overflow-hidden"
+        class="flex flex-col lg:flex-row gap-4 p-4 md:p-6 lg:h-[70dvh] lg:items-stretch lg:overflow-hidden bg-zinc-900/80 backdrop-blur-3xl
+        rounded-2xl border-2 border-white/10 shadow-2xl"
       >
-        <div class="max-w-lg flex flex-col">
+        <div class="flex flex-col md:min-w-md md:max-w-lg">
           <h1
             transition:animate={fade({ duration: 200 })}
             transition:name={`name-${slug}`}
-            class="text-[36px] md:text-[86px] font-bold"
+            class="text-[36px] md:text-[76px] font-bold"
             aria-label="Project Name"
           >
             {name}
           </h1>
 
-          <div class="flex gap-4 pb-4" aria-label="Project Links">
+          <div class="flex gap-2 py-2" aria-label="Project Links">
             <a
               id={`${slug}-live-link`}
               aria-label="Visit live project"
@@ -92,23 +93,38 @@ const { Content } = await render(project)
           </div>
 
           <div
-            class="p-2 pb-6 prose prose-invert text-balance rounded-2xl overflow-y-auto"
+            class="p-2 md:mt-4 prose prose-invert text-balance rounded-2xl flex-1 min-h-0 overflow-y-auto"
             aria-label="Project Description"
           >
             <Content />
+            {
+              user ? (
+                <div class="flex flex-col p-2 md:p-4 bg-lime-400/10 rounded-2xl border border-white/10">
+                  <span class="font-semibold">
+                    Demo user: <span class="font-normal">{user.username}</span>
+                  </span>
+                  <span class="font-semibold">
+                    Demo password:{" "}
+                    <span class="font-normal">{user.password}</span>
+                  </span>
+                </div>
+              ) : null
+            }
           </div>
         </div>
 
-        <div class="flex flex-col gap-6">
+        <div class="flex flex-col justify-center gap-6 pb-4 md:max-w-2xl">
           {
-            images && images.length > 0 && (
+            images && images.length > 0 ? (
               <ImageCarousel images={images} slug={slug} name={name} />
-            )
+            ) : null
           }
 
-          <div>
+          <div
+            class="flex flex-col p-4 md:p-8 bg-lime-400/10 rounded-2xl border border-white/10"
+          >
             <h3
-              class="text-2xl font-semibold text-center underline
+              class="text-xl md:text-2xl font-semibold text-center underline
                 decoration-lime-300 decoration-2 underline-offset-6"
             >
               Tools

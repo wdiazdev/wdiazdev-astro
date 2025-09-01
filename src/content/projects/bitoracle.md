@@ -9,7 +9,7 @@ frontend:
   [
     { name: "React", icon: "skill-icons:react-dark" },
     { name: "JavaScript", icon: "skill-icons:javascript" },
-    { name: "Axios", icon: "logos:axios" },
+    { name: "Axios", icon: "devicon-plain:axios-wordmark" },
     { name: "Tanstack", icon: "logos:react-query-icon" },
     { name: "CSS3", icon: "skill-icons:css" },
     { name: "Vite", icon: "skill-icons:vite-dark" },
@@ -19,6 +19,10 @@ images:
   - /bitoracle/bitoracle-1.jpg
   - /bitoracle/bitoracle-2.jpg
   - /bitoracle/bitoracle-3.jpg
+user: { 
+username: "test@test.com",
+password: "pass123" 
+}
 ---
 
 **Bitoracle** is a cryptocurrency dashboard that allows users to track all their assets on one page and provides market data in real time.
@@ -32,8 +36,3 @@ images:
 **User Interface:** The UI components were built from scratch with vanilla **CSS3**, combined with **JavaScript** conditional statements to dynamically add styles based on market data and user interaction.
 
 **Dashboard:** The dashboard page is protected, only logged-in users have access. On this page, users can create, read, update, and delete their entries following the CRUD programming model.
-
-```txt
-Demo User: test@test.com
-Demo Password: pass123
-```
