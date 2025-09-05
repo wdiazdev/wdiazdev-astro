@@ -1,7 +1,76 @@
 ---
+import ArticleCard from "../components/ArticleCard.astro"
 import SectionLayout from "../components/SectionLayout.astro"
+import InfoBlock from "../components/InfoBlock.astro"
 ---
 
-<SectionLayout id="about" header title="About" subtitle="About me">
-  <!-- <Header title="About" subtitle="About me" /> -->
+<SectionLayout
+  id="about"
+  header
+  title="Behind the Code"
+  subtitle="Exploring creativity, code, and continuous growth."
+>
+  <div class="flex flex-col gap-8 max-w-6xl mx-auto my-20">
+    <div class="md:columns-2 space-y-6 md:space-y-12 space-x-8">
+      <InfoBlock title="Hi, I’m Wilfredo Diaz">
+        A Full Stack Software Engineer who loves building things that feel
+        smooth, modern, and intuitive. I like building clean, easy-to-use
+        interfaces and finding simple ways to solve tricky problems.
+      </InfoBlock>
+
+      <InfoBlock title="Technologies">
+        I use tools like TypeScript, React, React Native, Node/Express, ASP.NET
+        Core, SQL, and REST APIs. But more than sticking to one stack, I’m a
+        quick learner who can jump into new tech when needed. I love
+        experimenting with AI and other workflows that help me build smarter and
+        faster.
+      </InfoBlock>
+
+      <InfoBlock title="Collaboration">
+        I value strong communication, whether it’s syncing with teammates or
+        working one-on-one with clients. Collaboration makes it easier to solve
+        problems together and ensures the final product matches what people
+        really need.
+      </InfoBlock>
+
+      <InfoBlock title="Growth">
+        I’m constantly learning and adapting, staying humble while sharpening my
+        skills. Whether it’s new frameworks, better workflows, or communication
+        practices, I always aim to grow as both a developer and a teammate.
+      </InfoBlock>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <h3
+        class="text-xl md:text-3xl font-bold underline
+                decoration-lime-300/80 decoration-2 underline-offset-12"
+      >
+        Community
+      </h3>
+      <p class="mt-2 prose prose-invert">
+        Community is important to me. I stay active by helping new developers
+        and career changers figure out their next steps, answering questions
+        about learning paths, and jumping on coffee chats to share advice or
+        experiences. I believe giving back helps us all grow together.
+      </p>
+      <p class="mt-2 prose prose-invert">
+        I also engage with the developer community by exploring new ways to
+        solve problems and discussing the tools and technologies shaping our
+        industry. My goal is to stay connected and showcase that I’m an active
+        contributor to the conversation. Some of my LinkedIn posts have even
+        reached over 200k impressions, reflecting the impact of shared knowledge
+        and experiences.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <h3
+        class="text-xl md:text-3xl font-bold underline
+                decoration-lime-300/80 decoration-2 underline-offset-12"
+      >
+        Articles
+      </h3>
+      <ArticleCard />
+    </div>
+  </div>
 </SectionLayout>

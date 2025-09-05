@@ -53,7 +53,7 @@ const { Content } = await render(project)
       <div
         class="flex flex-col md:flex-row w-full max-w-7xl md:h-[70dvh] md:items-stretch
         md:overflow-hidden bg-zinc-900/60 backdrop-blur-2xl
-        rounded-2xl border border-white/10 shadow-xl shadow-white/10"
+        rounded-2xl border border-white/10"
       >
         <div class="flex flex-col w-full min-w-md max-w-xl p-4">
           <button
@@ -111,10 +111,10 @@ const { Content } = await render(project)
             {
               user ? (
                 <div class="flex flex-col p-4 bg-slate-400/10 rounded-2xl">
-                  <span class="font-semibold">
+                  <span class="font-semibold text-lime-300/80">
                     Demo user: <span class="font-normal">{user.username}</span>
                   </span>
-                  <span class="font-semibold">
+                  <span class="font-semibold text-lime-300/80">
                     Demo password:{" "}
                     <span class="font-normal">{user.password}</span>
                   </span>
@@ -127,24 +127,25 @@ const { Content } = await render(project)
         <div class="flex flex-col justify-center gap-6 p-4 max-w-2xl">
           <ProjectImagesSwiper images={images} slug={slug} client:load />
           <div
-            class="flex flex-col p-4 md:p-8 bg-slate-400/10 rounded-2xl w-full mx-auto"
+            class="flex flex-col p-4 md:p-8 bg-slate-400/10 rounded-2xl w-full mx-auto
+            shadow-lg shadow-lime-300/10"
           >
             <h3
               class="text-xl md:text-2xl font-semibold text-center underline
-                decoration-lime-300 decoration-2 underline-offset-6"
+                decoration-lime-300/80 decoration-2 underline-offset-6"
             >
               Tools
             </h3>
             {
               !fullstack ? (
                 <div class="flex flex-col gap-4">
-                  <ToolList title="FrontEnd" items={frontend} />
+                  <ToolList title="Frontend" items={frontend} />
                   <ToolList title="BaaS" items={baas} />
                 </div>
               ) : (
                 <div class="flex flex-col gap-4">
-                  <ToolList title="FrontEnd" items={frontend} />
-                  <ToolList title="BackEnd" items={backend} />
+                  <ToolList title="Frontend" items={frontend} />
+                  <ToolList title="Backend" items={backend} />
                 </div>
               )
             }

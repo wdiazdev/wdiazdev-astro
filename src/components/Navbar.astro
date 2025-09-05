@@ -5,20 +5,17 @@ const navItems = [
   { label: "Home", href: "#welcome" },
   { label: "About", href: "#about" },
   { label: "Portfolio", href: "#portfolio" },
-  { label: "Skills", href: "#" },
   { label: "Contact", href: "#contact" },
 ]
 ---
 
-<nav
-  id="navbar"
-  class="fixed top-0 left-0 right-0 z-[100] backdrop-blur-md shadow-[0_1px_4px_-1px_rgba(255,255,255,0.4)]"
->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-[100]
+  backdrop-blur-md">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex justify-between items-center h-16">
       <a
         href="/"
-        class="text-xl font-bold bg-gradient-to-r from-blue-500 to-lime-300 bg-clip-text text-transparent"
+        class="text-lg md:text-2xl font-bold bg-gradient-to-r from-blue-500 to-lime-300 bg-clip-text text-transparent"
         >WDIAZDEV</a
       >
 
@@ -27,7 +24,8 @@ const navItems = [
           navItems.map((item) => (
             <a
               href={item.href}
-              class="text-gray-400 font-medium hover:text-lime-300 transition-colors duration-300"
+              class="text-gray-400 font-medium hover:text-lime-300 transition-colors 
+              duration-300"
             >
               {item.label}
             </a>

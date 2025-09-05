@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content"
+import { Icon } from "astro-icon/components"
+
+const articles = await getCollection("articles")
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  {
+    articles.map(({ data }) => {
+      const { title, description, link } = data
+      const slug = title.toLowerCase().replace(/\s+/g, "-")
+
+      return (
+        <div
+          id={slug}
+          aria-label={`Article Card for ${title}`}
+          class="flex flex-col p-4 md:p-6 bg-slate-400/10 
+          rounded-2xl shadow-lg shadow-lime-300/10 mt-2"
+        >
+          <div class="flex flex-col gap-2 flex-1">
+            <h4 class="text-md md:text-lg font-semibold text-center">
+              {title}
+            </h4>
+            <p class="prose prose-invert text-base md:text-md">{description}</p>
+          </div>
+
+          <a
+            id={`${slug}-link`}
+            href={link}
+            aria-label={`Read more about ${title}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Read more"
+            class="flex gap-1 items-center text-lime-300/80 hover:underline-none mt-2"
+          >
+            <Icon name="mdi:document" size={22} />
+            <span class="translate-y-[1px] text-sm"> Read more</span>
+          </a>
+        </div>
+      )
+    })
+  }
+</div>

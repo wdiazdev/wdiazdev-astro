@@ -17,7 +17,12 @@ const { id, header, title, subtitle, fullHeight = true } = Astro.props as Props
   {
     header && (
       <div class="relative z-50 mt-18">
-        <h1 class="text-[36px] md:text-[76px] font-bold">{title}</h1>
+        <h1
+          class="text-[36px] md:text-[76px] font-bold underline
+                decoration-lime-300/80 decoration-2 underline-offset-14"
+        >
+          {title}
+        </h1>
         <p class="text-[18px] md:text-[26px] font-semibold text-lime-300/80">
           {subtitle}
         </p>
