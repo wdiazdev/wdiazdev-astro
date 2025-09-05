@@ -20,6 +20,7 @@ images:
   - /bitoracle/bitoracle-1.jpg
   - /bitoracle/bitoracle-2.jpg
   - /bitoracle/bitoracle-3.jpg
+  - /bitoracle/bitoracle-4.jpg
 user: { 
 username: "test@test.com",
 password: "pass123" 

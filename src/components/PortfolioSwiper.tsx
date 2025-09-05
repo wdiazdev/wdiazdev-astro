@@ -30,7 +30,10 @@ export const PortfolioSwiper = ({ projects }: { projects: Project[] }) => {
             border-white/10 h-[500px] md:h-[600px] bg-cover bg-center"
             style={{ backgroundImage: `url(/images/${data.cover})` }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[76%] to-black/100"></div>
+            <div
+              className="absolute inset-0 rounded-2xl bg-gradient-to-r 
+              from-transparent to-black/100"
+            ></div>
             <div
               className="flex flex-col gap-4 p-4 rounded-2xl z-50 bg-slate-600/30 
               backdrop-blur-md border border-white/10 min-w-full md:min-w-lg
@@ -61,7 +64,9 @@ export const ProjectImagesSwiper = ({
   const hasMultiple = images && images.length ? true : false
   return (
     <Swiper
-      className="w-full min-w-0 h-[25svh] md:h-[38svh]"
+      className="h-[26vh] w-[80vw] md:h-[360px] md:w-full 
+      overflow-hidden border border-white/10 rounded-2xl
+      shadow-lg shadow-white/10"
       slidesPerView={1}
       spaceBetween={25}
       loop={hasMultiple}
@@ -74,8 +79,7 @@ export const ProjectImagesSwiper = ({
       {images.map((item, index) => (
         <SwiperSlide key={`${slug}-${index}`}>
           <div
-            className="w-full h-full rounded-2xl overflow-hidden border border-white/10
-                 bg-cover bg-center bg-no-repeat"
+            className="h-full w-full bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(/images/${item})` }}
             aria-label={`${slug} screenshot ${index + 1}`}
             role="img"
