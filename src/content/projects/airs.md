@@ -32,7 +32,7 @@ images:
   - /airs/airs-4.jpg
 ---
 
-**AIRS** enables users to securely authenticate and manage property listings with ease. Whether creating, updating, or deleting listings, the application delivers a seamless real-estate portfolio experience and includes a robust cash-flow calculator so users can analyze property finances for informed investment decisions.
+**AIRS** is a full-stack web application that enables users to securely authenticate and manage property listings with ease. Whether creating, updating, or deleting listings, the application delivers a seamless real-estate portfolio experience and includes a robust cash-flow calculator so users can analyze property finances for informed investment decisions.
 
 **Routing:** The web application has multiple pages built with React Router, allowing users to navigate the content while keeping the UI in sync with the URL.
 
