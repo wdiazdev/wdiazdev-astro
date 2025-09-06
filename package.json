@@ -10,7 +10,6 @@
     "postinstall": "astro telemetry disable"
   },
   "dependencies": {
-    "@astrojs/node": "^9.4.3",
     "@astrojs/react": "^4.3.0",
     "@iconify-json/devicon": "^1.2.43",
     "@iconify-json/devicon-plain": "^1.2.38",
