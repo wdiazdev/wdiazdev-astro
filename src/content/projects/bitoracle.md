@@ -1,7 +1,7 @@
 ---
-id: 2
+id: 1
 name: BitOracle
-description: "Bitoracle is a cryptocurrency dashboard that allows users to track all their assets on one page and provides market data in real time."
+description: Bitoracle is a cryptocurrency dashboard that allows users to track all their assets on one page and provides market data in real time.
 cover: bitoracle.jpg
 repository: https://github.com/wdiazdev/Bitoracle
 live: https://wdiazdev.github.io/Bitoracle/

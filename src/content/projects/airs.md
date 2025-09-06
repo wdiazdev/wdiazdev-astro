@@ -1,7 +1,7 @@
 ---
 id: 4
 name: AIRS
-description: "AIRS enables users to securely authenticate and manage property listings with ease. Whether creating, updating, or deleting listings, the application delivers a seamless real-estate portfolio experience and includes a robust cash-flow calculator so users can analyze property finances for informed investment decisions."
+description: AIRS enables users to securely authenticate and manage property listings with ease. Whether creating, updating, or deleting listings, the application delivers a seamless real-estate portfolio experience and includes a robust cash-flow calculator so users can analyze property finances for informed investment decisions.
 cover: airs.jpg
 repository: https://github.com/wdiazdev/airs
 live: https://airs-o2pq.onrender.com/

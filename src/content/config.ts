@@ -6,7 +6,7 @@ const projects = defineCollection({
     name: z.string(),
     description: z.string(),
     cover: z.string(),
-    repository: z.string().url(),
+    repository: z.string().url().optional(),
     live: z.string().url(),
     fullstack: z.boolean(),
     frontend: z

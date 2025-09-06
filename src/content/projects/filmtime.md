@@ -1,7 +1,7 @@
 ---
-id: 3
+id: 2
 name: Film Time
-description: "Film Time is designed to let users explore movies and TV shows, see trending/upcoming/popular titles, and save their personal favorites to a protected account. It blends interactive UI elements with user authentication and data persistence, creating a personalized experience."
+description: Film Time is designed to let users explore movies and TV shows, see trending/upcoming/popular titles, and save their personal favorites to a protected account. It blends interactive UI elements with user authentication and data persistence, creating a personalized experience.
 cover: filmtime.jpg
 repository: https://github.com/wdiazdev/filmtime
 live: https://wdiazdev.github.io/filmtime/
